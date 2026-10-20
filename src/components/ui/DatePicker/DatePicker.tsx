@@ -22,9 +22,9 @@ import { inputVariants as inputTextVariants } from '../Input/Input';
 export interface DatePickerProps extends Omit<DatePickerRootProps, 'size' | 'variant'> {}
 
 const selectButtonClass = `inline-flex items-center justify-center border-0 bg-transparent cursor-pointer
-    px-1.5! py-1! rounded! text-sm! font-medium! text-surface-700! dark:text-surface-0!
+    !px-1.5 !py-1 !rounded text-sm font-medium text-content-main
     transition-colors duration-150
-    hover:bg-surface-100! dark:hover:bg-surface-800!
+    hover:bg-surface
     focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-primary`;
 
 function DayTableHead() {
@@ -36,12 +36,12 @@ function DayTableHead() {
     return (
         <PRDatePicker.TableHeadRow>
             {showWeek && (
-                <PRDatePicker.TableHeadWeekCell className="p-1 text-xs font-normal text-surface-500 dark:text-surface-400 opacity-60">
+                <PRDatePicker.TableHeadWeekCell className="p-1 text-xs font-normal text-content-sub opacity-60">
                     <span className="block text-center">{weekHeaderLabel}</span>
                 </PRDatePicker.TableHeadWeekCell>
             )}
             {weekDays.map((day, index) => (
-                <PRDatePicker.TableHeadCell key={index} abbr={day} className="p-1 text-xs font-normal text-surface-500 dark:text-surface-400">
+                <PRDatePicker.TableHeadCell key={index} abbr={day} className="p-1 text-xs font-normal text-content-sub">
                     <PRDatePicker.TableHeadWeekLabel className="block text-center">{day}</PRDatePicker.TableHeadWeekLabel>
                 </PRDatePicker.TableHeadCell>
             ))}
@@ -60,38 +60,38 @@ function DayTableBody({ index = 0 }: { index?: number }) {
                 <PRDatePicker.TableBodyRow key={weekIndex}>
                     {showWeek && (
                         <PRDatePicker.TableBodyWeekCell className="py-px opacity-60">
-                            <PRDatePicker.TableBodyWeekLabel className="flex items-center justify-center size-9 mx-auto text-sm font-normal text-surface-700 dark:text-surface-0">{month?.weekNumbers?.[weekIndex]}</PRDatePicker.TableBodyWeekLabel>
+                            <PRDatePicker.TableBodyWeekLabel className="flex items-center justify-center size-9 mx-auto text-sm font-normal text-content-main">{month?.weekNumbers?.[weekIndex]}</PRDatePicker.TableBodyWeekLabel>
                         </PRDatePicker.TableBodyWeekCell>
                     )}
                     {week.map((date) => (
                         <PRDatePicker.TableBodyCell key={date.day + '' + date.month} date={date} className="py-px">
                             <span
-                                className={`flex items-center justify-center w-full h-9 rounded-full text-sm font-normal transition-none
-                                has-data-in-range:bg-primary/10 has-data-in-range:rounded-none
-                                has-[[data-range-start]:not([data-range-end]):not([data-range-pending]):not([data-hover-range-end])]:bg-primary/10 has-[[data-range-start]:not([data-range-end]):not([data-range-pending]):not([data-hover-range-end])]:rounded-r-none
-                                has-[[data-range-start][data-hover-range-start]:not([data-hover-range-end])]:bg-primary/10 has-[[data-range-start][data-hover-range-start]:not([data-hover-range-end])]:rounded-r-none
-                                has-[[data-range-end]:not([data-range-start]):not([data-hover-range-start])]:bg-primary/10 has-[[data-range-end]:not([data-range-start]):not([data-hover-range-start])]:rounded-l-none
-                                has-data-in-hover-range:bg-primary/10 has-data-in-hover-range:rounded-none
-                                has-[[data-hover-range-start]:not([data-hover-range-end])]:bg-primary/10 has-[[data-hover-range-start]:not([data-hover-range-end])]:rounded-r-none
-                                has-[[data-hover-range-end]:not([data-hover-range-start])]:bg-primary/10 has-[[data-hover-range-end]:not([data-hover-range-start])]:rounded-l-none
-                                [td:first-child_&]:rounded-l-full!
-                                [td:last-child_&]:rounded-r-full!`}
+                                className={`flex items-center justify-center w-full h-9 transition-colors
+                                has-[[data-in-range]]:bg-primary/15
+                                has-[[data-in-hover-range]]:bg-primary/10
+                                has-[[data-range-start]]:bg-primary/15 has-[[data-range-start]]:rounded-l-full
+                                has-[[data-range-end]]:bg-primary/15 has-[[data-range-end]]:rounded-r-full
+                                has-[[data-range-pending]]:bg-transparent
+                                has-[[data-range-start][data-range-end]]:bg-transparent
+                                [td:first-child_&]:rounded-l-full
+                                [td:last-child_&]:rounded-r-full`}
                             >
                                 <DatePickerDay
                                     className={`relative flex items-center justify-center size-9 mx-auto rounded-full cursor-pointer
-                                    text-surface-700 dark:text-surface-0 transition-none
-                                    focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-primary
-                                    data-outside:text-surface-400 dark:data-outside:text-surface-500
-                                    data-today:after:content-[''] data-today:after:absolute data-today:after:bottom-1 data-today:after:left-1/2 data-today:after:-translate-x-1/2 data-today:after:size-1 data-today:after:rounded-full data-today:after:bg-primary
-                                    data-selected:data-today:after:bg-white
-                                    data-hover-range-start:data-today:after:bg-white
-                                    data-hover-range-end:data-today:after:bg-white
-                                    data-disabled:opacity-40 data-disabled:cursor-not-allowed
-                                    not-data-selected:not-data-disabled:not-data-in-range:not-data-in-hover-range:not-data-range-start:not-data-range-end:not-data-hover-range-start:not-data-hover-range-end:hover:bg-surface
-                                    dark:not-data-selected:not-data-disabled:not-data-in-range:not-data-in-hover-range:not-data-range-start:not-data-range-end:not-data-hover-range-start:not-data-hover-range-end:hover:bg-surface
-                                    data-selected:bg-primary data-selected:text-white data-selected:hover:bg-primary
-                                    data-hover-range-start:bg-primary data-hover-range-start:text-white data-hover-range-start:hover:bg-primary
-                                    data-hover-range-end:bg-primary data-hover-range-end:text-white data-hover-range-end:hover:bg-primary`}
+                                    text-content-main select-none transition-colors duration-100 text-sm font-normal
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
+                                    hover:bg-surface
+                                    data-[outside]:text-content-hint/40
+                                    data-[disabled]:opacity-30 data-[disabled]:cursor-not-allowed data-[disabled]:hover:bg-transparent
+                                    data-[today]:after:content-[''] data-[today]:after:absolute data-[today]:after:bottom-1 data-[today]:after:left-1/2 data-[today]:after:-translate-x-1/2 data-[today]:after:w-1 data-[today]:after:h-1 data-[today]:after:rounded-full data-[today]:after:bg-primary
+                                    data-[selected]:!bg-primary data-[selected]:!text-white data-[selected]:font-semibold data-[selected]:hover:!bg-turquoise-700
+                                    data-[selected]:data-[today]:after:!bg-white
+                                    data-[range-start]:!bg-primary data-[range-start]:!text-white data-[range-start]:font-semibold data-[range-start]:hover:!bg-turquoise-700
+                                    data-[range-end]:!bg-primary data-[range-end]:!text-white data-[range-end]:font-semibold data-[range-end]:hover:!bg-turquoise-700
+                                    data-[hover-range-start]:!bg-primary data-[hover-range-start]:!text-white data-[hover-range-start]:hover:!bg-turquoise-700
+                                    data-[hover-range-end]:!bg-primary data-[hover-range-end]:!text-white data-[hover-range-end]:hover:!bg-turquoise-700
+                                    data-[in-range]:!bg-primary/15 data-[in-range]:!text-primary data-[in-range]:!rounded-none data-[in-range]:font-medium
+                                    data-[in-hover-range]:!bg-primary/10 data-[in-hover-range]:!rounded-none`}
                                 />
                             </span>
                         </PRDatePicker.TableBodyCell>
@@ -102,11 +102,11 @@ function DayTableBody({ index = 0 }: { index?: number }) {
     );
 }
 
-const monthYearButtonClass = `flex items-center justify-center w-full! h-9 mx-auto rounded-md! cursor-pointer text-sm! font-normal! p-0!
-    text-surface-700! dark:text-surface-0! transition-colors duration-150
-    not-data-selected:not-data-disabled:hover:bg-surface! dark:not-data-selected:not-data-disabled:hover:bg-surface!
-    data-selected:bg-primary! data-selected:text-white! data-selected:hover:bg-primary!
-    data-disabled:opacity-40 data-disabled:cursor-not-allowed
+const monthYearButtonClass = `flex items-center justify-center !w-full h-9 mx-auto !rounded-md cursor-pointer text-sm font-normal !p-0
+    text-content-main transition-colors duration-150
+    hover:bg-surface
+    data-[selected]:!bg-primary data-[selected]:!text-white data-[selected]:font-semibold data-[selected]:hover:!bg-turquoise-700
+    data-[disabled]:opacity-40 data-[disabled]:cursor-not-allowed
     focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-primary`;
 
 function MonthTableBody() {

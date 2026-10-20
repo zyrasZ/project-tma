@@ -400,5 +400,78 @@
       "updateSuccess": "Updated invoice configuration successfully",
       "deleteSuccess": "Deleted invoice configuration successfully"
     }
+  },
+  "invoiceReport": {
+    "title": "Reports",
+    "cardTitle": "Invoice Report",
+    "exportXlsx": "Export xlsx",
+    "exportPdf": "Export pdf",
+    "filterBtn": "Filter",
+    "itemName": "invoices",
+    "stats": {
+      "issued": "Issued Invoices",
+      "pending": "Pending Invoices",
+      "error": "Error Invoices",
+      "flagged": "Flagged Invoices"
+    },
+    "filter": {
+      "station": "Station",
+      "stationPlaceholder": "Select station",
+      "displayParam": "Display Parameter",
+      "displayParamPlaceholder": "Select parameter",
+      "status": "Status",
+      "statusPlaceholder": "Select status",
+      "pumpDate": "Pump Date",
+      "reset": "Reset filter",
+      "allParams": "All parameters",
+      "allStatuses": "All statuses"
+    },
+    "table": {
+      "pumpCode": "Pump Code",
+      "customerCode": "Customer Code",
+      "exchangeRate": "Exchange Rate",
+      "currency": "Currency",
+      "buyerName": "Buyer Name",
+      "customerName": "Customer Name",
+      "taxCode": "Tax Code",
+      "address": "Address",
+      "email": "Email",
+      "fuelType": "Fuel",
+      "unit": "Unit",
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price (excl. VAT)",
+      "subtotal": "Subtotal",
+      "taxRate": "% VAT",
+      "taxAmount": "VAT Amount",
+      "totalAmount": "Total Amount",
+      "paymentMethod": "Payment Method",
+      "formNumber": "Form No.",
+      "symbol": "Symbol",
+      "pumpDate": "Pump Date",
+      "createdDate": "Created Date",
+      "status": "Status",
+      "empty": "No invoice report data found"
+    },
+    "filterModal": {
+      "title": "Report Filter",
+      "searchLabel": "Search",
+      "searchPlaceholder": "Pump code, customer code, buyer, tax code...",
+      "fuelLabel": "Fuel Type",
+      "statusLabel": "Invoice Status",
+      "reset": "Reset",
+      "cancel": "Cancel",
+      "apply": "Apply"
+    },
+    "detailModal": {
+      "title": "Invoice Report Details",
+      "close": "Close"
+    },
+    "toast": {
+      "success": "Success",
+      "error": "Failed",
+      "exportSuccess": "Exported file successfully",
+      "exportFailed": "An error occurred while exporting data"
+    }
   }
 }
+

@@ -12,6 +12,7 @@ import { OverviewPage } from '../pages/Staff/Overview/OverviewPage';
 import { StationManagementPage } from '../pages/Staff/Stations/StationManagementPage';
 import { FuelParamsPage } from '../pages/Staff/Stations/FuelParamsPage';
 import { InvoiceConfigPage } from '../pages/Staff/InvoiceConfig/InvoiceConfigPage';
+import { InvoiceReportPage } from '../pages/Staff/Reports/InvoiceReport/InvoiceReportPage';
 
 export const AppRouter = () => {
   return (
@@ -53,6 +54,10 @@ export const AppRouter = () => {
             <Route path="invoices">
               <Route index element={<InvoiceConfigPage />} />
               <Route path="config" element={<InvoiceConfigPage />} />
+            </Route>
+            <Route path="reports">
+              <Route index element={<InvoiceReportPage />} />
+              <Route path="invoices" element={<InvoiceReportPage />} />
             </Route>
           </Route>
         </Route>

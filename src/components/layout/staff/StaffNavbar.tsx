@@ -88,7 +88,7 @@ export const StaffNavbar = () => {
             <NavMenuTrigger>{t('staffNavbar.customers')}</NavMenuTrigger>
             <NavMenuTrigger>{t('staffNavbar.allocation')}</NavMenuTrigger>
             <NavMenuTrigger>{t('staffNavbar.tools')}</NavMenuTrigger>
-            <NavMenuTrigger>{t('staffNavbar.reports')}</NavMenuTrigger>
+            <NavMenuTrigger to="/staff/reports">{t('staffNavbar.reports')}</NavMenuTrigger>
             <div className="ml-4 text-[13px] font-medium text-content-sub hover:text-content-main cursor-pointer">
               {t('staffNavbar.guide')}
             </div>

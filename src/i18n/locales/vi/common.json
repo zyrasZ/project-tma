@@ -400,5 +400,78 @@
       "updateSuccess": "Đã cập nhật cấu hình hóa đơn",
       "deleteSuccess": "Đã xóa cấu hình hóa đơn"
     }
+  },
+  "invoiceReport": {
+    "title": "Báo cáo",
+    "cardTitle": "Báo cáo hóa đơn",
+    "exportXlsx": "Xuất xlsx",
+    "exportPdf": "Xuất pdf",
+    "filterBtn": "Bộ lọc",
+    "itemName": "hóa đơn",
+    "stats": {
+      "issued": "Hóa đơn đã xuất",
+      "pending": "Hóa đơn chưa xuất",
+      "error": "Hóa đơn xuất lỗi",
+      "flagged": "Hóa đơn đánh dấu"
+    },
+    "filter": {
+      "station": "Trạm",
+      "stationPlaceholder": "Chọn trạm",
+      "displayParam": "Thông số hiển thị",
+      "displayParamPlaceholder": "Chọn thông số hiển thị",
+      "status": "Trạng thái",
+      "statusPlaceholder": "Chọn trạng thái",
+      "pumpDate": "Ngày bơm",
+      "reset": "Đặt lại bộ lọc",
+      "allParams": "Tất cả thông số",
+      "allStatuses": "Tất cả trạng thái"
+    },
+    "table": {
+      "pumpCode": "Mã bơm",
+      "customerCode": "Mã khách hàng",
+      "exchangeRate": "Tỷ giá",
+      "currency": "Đơn vị tiền tệ",
+      "buyerName": "Tên người mua",
+      "customerName": "Tên khách hàng",
+      "taxCode": "Mã số thuế",
+      "address": "Địa chỉ",
+      "email": "Email",
+      "fuelType": "Nhiên liệu",
+      "unit": "Đơn vị tính",
+      "quantity": "Số lượng",
+      "unitPrice": "Đơn giá chưa thuế",
+      "subtotal": "Thành tiền",
+      "taxRate": "% thuế GTGT",
+      "taxAmount": "Tiền thuế GTGT",
+      "totalAmount": "Tổng tiền",
+      "paymentMethod": "Hình thức thanh toán",
+      "formNumber": "Mẫu số",
+      "symbol": "Ký hiệu",
+      "pumpDate": "Ngày bơm",
+      "createdDate": "Ngày tạo",
+      "status": "Trạng thái",
+      "empty": "Không có dữ liệu báo cáo hóa đơn"
+    },
+    "filterModal": {
+      "title": "Bộ lọc báo cáo",
+      "searchLabel": "Tìm kiếm",
+      "searchPlaceholder": "Mã bơm, mã KH, người mua, MST...",
+      "fuelLabel": "Loại nhiên liệu",
+      "statusLabel": "Trạng thái hóa đơn",
+      "reset": "Đặt lại",
+      "cancel": "Hủy",
+      "apply": "Áp dụng"
+    },
+    "detailModal": {
+      "title": "Chi tiết báo cáo hóa đơn",
+      "close": "Đóng"
+    },
+    "toast": {
+      "success": "Thành công",
+      "error": "Thất bại",
+      "exportSuccess": "Đã xuất file thành công",
+      "exportFailed": "Có lỗi xảy ra khi xuất dữ liệu"
+    }
   }
 }
+
