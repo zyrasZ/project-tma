@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, keepPreviousData } from '@tanstack/react-query';
 import { invoiceReportApi } from '../../../api/invoiceReport.api';
 import type { GetInvoiceReportParams } from '../../../types/invoiceReport';
 
@@ -8,6 +8,7 @@ export const useGetInvoiceReports = (params?: GetInvoiceReportParams) => {
   return useQuery({
     queryKey: [...INVOICE_REPORTS_QUERY_KEY, params],
     queryFn: () => invoiceReportApi.getInvoiceReports(params),
+    placeholderData: keepPreviousData,
   });
 };
 

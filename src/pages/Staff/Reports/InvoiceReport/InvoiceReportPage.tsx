@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardFooter } from '../../../../components/ui/Card';
 import { Paginator } from '../../../../components/ui/Paginator';
 import { useAppToast } from '../../../../components/ui/Toast';
-import { useDebounce } from '../../../../hooks/ui/useDebounce';
 import {
   useGetInvoiceReports,
   useExportInvoiceReportXlsx,
@@ -25,10 +24,10 @@ export const InvoiceReportPage = () => {
   const { showToast } = useAppToast();
 
   // Filter local states (reactive immediate UI updates)
-  const [selectedStation, setSelectedStation] = useState<string>('hung_duyet');
+  const [selectedStation, setSelectedStation] = useState<string>('all');
   const [selectedDisplayParam, setSelectedDisplayParam] = useState<string>('');
   const [selectedStatus, setSelectedStatus] = useState<string>('');
-  const [dateRange, setDateRange] = useState<string>('01/01/2024 10:30  ->  31/01/2024 11:30');
+  const [dateRange, setDateRange] = useState<string>('');
   const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
   const [selectedRow, setSelectedRow] = useState<InvoiceReportItem | null>(null);
 
@@ -36,18 +35,12 @@ export const InvoiceReportPage = () => {
   const [first, setFirst] = useState(0);
   const [rows, setRows] = useState(10);
 
-  // Debounced filter parameters for fake API query (400ms debounce)
-  const debouncedStation = useDebounce<string>(selectedStation, 400);
-  const debouncedDisplayParam = useDebounce<string>(selectedDisplayParam, 400);
-  const debouncedStatus = useDebounce<string>(selectedStatus, 400);
-  const debouncedDateRange = useDebounce<string>(dateRange, 400);
-
-  // Fetch report data using TanStack React Query with debounced parameters
+  // Fetch report data using TanStack React Query (immediate 0ms response for Dropdown & DatePicker)
   const { data: reportData, isLoading, isFetching } = useGetInvoiceReports({
-    stationId: debouncedStation,
-    displayParam: debouncedDisplayParam,
-    status: debouncedStatus,
-    dateRange: debouncedDateRange,
+    stationId: selectedStation,
+    displayParam: selectedDisplayParam,
+    status: selectedStatus,
+    dateRange: dateRange,
     first,
     rows,
   });
@@ -86,10 +79,10 @@ export const InvoiceReportPage = () => {
 
   // Reset all filters to default initial values
   const handleResetFilters = () => {
-    setSelectedStation('hung_duyet');
+    setSelectedStation('all');
     setSelectedDisplayParam('');
     setSelectedStatus('');
-    setDateRange('01/01/2024 10:30  ->  31/01/2024 11:30');
+    setDateRange('');
     setFirst(0);
   };
 

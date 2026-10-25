@@ -2,32 +2,12 @@ import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { InvoiceReportItem } from '../../../../../types/invoiceReport';
 import { InvoiceStatusBadge } from './InvoiceStatusBadge';
-import {
-  DataTable,
-  DataTableTableContainer,
-  DataTableTable,
-  DataTableTHead,
-  DataTableTHeadRow,
-  DataTableTHeadCell,
-  DataTableTBody,
-  DataTableRow,
-  DataTableCell,
-  DataTableLoading,
-} from '../../../../../components/ui/DataTable';
+import { ReportDataTable, type ReportColumnDef } from '../../../../../components/ui/DataTable';
 
 interface InvoiceReportTableProps {
   reports: InvoiceReportItem[];
   isLoading?: boolean;
   onRowClick?: (report: InvoiceReportItem) => void;
-}
-
-interface ColumnDef {
-  key: string;
-  header: string;
-  minWidth: string;
-  className?: string;
-  defaultVal?: string;
-  render?: (item: InvoiceReportItem) => React.ReactNode;
 }
 
 export const InvoiceReportTable: FC<InvoiceReportTableProps> = ({
@@ -37,9 +17,9 @@ export const InvoiceReportTable: FC<InvoiceReportTableProps> = ({
 }) => {
   const { t } = useTranslation('common');
 
-  const columns: ColumnDef[] = useMemo(
+  const columns: ReportColumnDef<InvoiceReportItem>[] = useMemo(
     () => [
-      { key: 'pumpCode', header: t('invoiceReport.table.pumpCode', 'Mã bơm'), minWidth: '130px', className: 'font-medium pl-6' },
+      { key: 'pumpCode', header: t('invoiceReport.table.pumpCode', 'Mã bơm'), minWidth: '130px', className: 'font-medium' },
       { key: 'customerCode', header: t('invoiceReport.table.customerCode', 'Mã khách hàng'), minWidth: '120px' },
       { key: 'exchangeRate', header: t('invoiceReport.table.exchangeRate', 'Tỷ giá'), minWidth: '70px', defaultVal: '1' },
       { key: 'currency', header: t('invoiceReport.table.currency', 'Đơn vị tiền tệ'), minWidth: '110px', defaultVal: 'VNĐ' },
@@ -65,7 +45,6 @@ export const InvoiceReportTable: FC<InvoiceReportTableProps> = ({
         key: 'status',
         header: t('invoiceReport.table.status', 'Trạng thái'),
         minWidth: '120px',
-        className: 'pr-6',
         render: (item) => <InvoiceStatusBadge status={item.status} />,
       },
     ],
@@ -73,57 +52,12 @@ export const InvoiceReportTable: FC<InvoiceReportTableProps> = ({
   );
 
   return (
-    <DataTable className="w-full relative">
-      {isLoading && <DataTableLoading />}
-      <DataTableTableContainer className="overflow-x-auto">
-        <DataTableTable className="w-full text-left border-collapse">
-          <DataTableTHead>
-            <DataTableTHeadRow className="bg-grey-primary-60 border-b border-divide text-[13px] text-content-main">
-              {columns.map((col, index) => (
-                <DataTableTHeadCell
-                  key={col.key}
-                  className={`py-3 px-4 font-semibold text-content-main whitespace-nowrap ${index === 0 ? 'pl-6' : ''} ${index === columns.length - 1 ? 'pr-6' : ''}`}
-                  style={{ minWidth: col.minWidth }}
-                >
-                  {col.header}
-                </DataTableTHeadCell>
-              ))}
-            </DataTableTHeadRow>
-          </DataTableTHead>
-
-          <DataTableTBody>
-            {reports.length === 0 ? (
-              <DataTableRow>
-                <DataTableCell colSpan={columns.length} className="py-12 text-center text-content-sub text-sm">
-                  {t('invoiceReport.table.empty', 'Không có dữ liệu báo cáo hóa đơn')}
-                </DataTableCell>
-              </DataTableRow>
-            ) : (
-              reports.map((item) => (
-                <DataTableRow
-                  key={item.id}
-                  onClick={() => onRowClick?.(item)}
-                  className="hover:bg-surface/60 transition-colors border-b border-divide text-[13px] cursor-pointer group"
-                >
-                  {columns.map((col) => {
-                    const rawVal = (item as any)[col.key];
-                    const displayVal = rawVal !== undefined && rawVal !== null && rawVal !== '' ? rawVal : col.defaultVal || '-';
-
-                    return (
-                      <DataTableCell
-                        key={col.key}
-                        className={`py-3.5 px-4 text-content-main whitespace-nowrap ${col.className || ''}`}
-                      >
-                        {col.render ? col.render(item) : displayVal}
-                      </DataTableCell>
-                    );
-                  })}
-                </DataTableRow>
-              ))
-            )}
-          </DataTableTBody>
-        </DataTableTable>
-      </DataTableTableContainer>
-    </DataTable>
+    <ReportDataTable
+      data={reports}
+      columns={columns}
+      isLoading={isLoading}
+      onRowClick={onRowClick}
+      emptyMessage={t('invoiceReport.table.empty', 'Không có dữ liệu báo cáo hóa đơn')}
+    />
   );
 };

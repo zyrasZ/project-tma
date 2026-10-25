@@ -472,6 +472,104 @@
       "exportSuccess": "Đã xuất file thành công",
       "exportFailed": "Có lỗi xảy ra khi xuất dữ liệu"
     }
+  },
+  "shiftReport": {
+    "title": "Báo cáo",
+    "cardTitle": "Báo cáo ca",
+    "exportXlsx": "Xuất xlsx",
+    "exportPdf": "Xuất pdf",
+    "filterBtn": "Bộ lọc",
+    "itemName": "dòng",
+    "breadcrumb": {
+      "reports": "Báo cáo",
+      "shiftRevenue": "Doanh thu theo ca"
+    },
+    "filter": {
+      "station": "Trạm",
+      "stationPlaceholder": "Chọn trạm",
+      "displayParam": "Thông số hiển thị",
+      "displayParamPlaceholder": "Chọn thông số hiển thị",
+      "startDate": "Ngày bắt đầu",
+      "startDatePlaceholder": "dd/mm/yyyy",
+      "shift": "Ca làm việc",
+      "shiftPlaceholder": "Chọn ca làm việc",
+      "dateRange": "Khoảng thời gian",
+      "reset": "Đặt lại bộ lọc"
+    },
+    "table": {
+      "id": "ID",
+      "startDate": "Ngày bắt đầu",
+      "endDate": "Ngày kết thúc",
+      "fuelA95": "Xăng A95-II",
+      "fuelDO": "Dầu DO",
+      "volume": "Số lít",
+      "amount": "Thành tiền",
+      "revenue": "Doanh thu",
+      "debt": "Ghi nợ",
+      "total": "Tổng",
+      "empty": "Không có dữ liệu báo cáo doanh thu theo ca"
+    },
+    "modal": {
+      "staff": "Nhân viên trực"
+    },
+    "detailModal": {
+      "title": "Chi tiết báo cáo doanh thu ca",
+      "close": "Đóng"
+    },
+    "toast": {
+      "success": "Thành công",
+      "error": "Thất bại",
+      "exportSuccess": "Đã xuất file thành công",
+      "exportFailed": "Có lỗi xảy ra khi xuất dữ liệu"
+    }
+  },
+  "personnelReport": {
+    "title": "Báo cáo",
+    "cardTitle": "Báo cáo nhân sự",
+    "exportXlsx": "Xuất xlsx",
+    "exportPdf": "Xuất pdf",
+    "filterBtn": "Bộ lọc",
+    "itemName": "nhân sự",
+    "breadcrumb": {
+      "reports": "Báo cáo",
+      "personnel": "Nhân sự"
+    },
+    "filter": {
+      "station": "Trạm",
+      "stationPlaceholder": "Chọn trạm",
+      "displayParam": "Thông số hiển thị",
+      "displayParamPlaceholder": "Chọn thông số hiển thị",
+      "role": "Phân quyền",
+      "rolePlaceholder": "Chọn phân quyền",
+      "status": "Trạng thái",
+      "statusPlaceholder": "Chọn trạng thái",
+      "searchPlaceholder": "Tìm tên, tài khoản, SĐT...",
+      "reset": "Đặt lại bộ lọc"
+    },
+    "table": {
+      "username": "Tên đăng nhập",
+      "fullName": "Họ tên",
+      "phone": "Số điện thoại",
+      "role": "Phân quyền",
+      "station": "Trạm",
+      "status": "Trạng thái",
+      "empty": "Không có dữ liệu báo cáo nhân sự"
+    },
+    "status": {
+      "active": "Hoạt động",
+      "inactive": "Ngừng hoạt động"
+    },
+    "detailModal": {
+      "title": "Chi tiết nhân sự",
+      "close": "Đóng"
+    },
+    "toast": {
+      "success": "Thành công",
+      "error": "Thất bại",
+      "exportSuccess": "Đã xuất file thành công",
+      "exportFailed": "Có lỗi xảy ra khi xuất dữ liệu"
+    }
   }
 }
+
 

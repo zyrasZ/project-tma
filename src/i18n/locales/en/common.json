@@ -472,6 +472,104 @@
       "exportSuccess": "Exported file successfully",
       "exportFailed": "An error occurred while exporting data"
     }
+  },
+  "shiftReport": {
+    "title": "Reports",
+    "cardTitle": "Shift Report",
+    "exportXlsx": "Export xlsx",
+    "exportPdf": "Export pdf",
+    "filterBtn": "Filter",
+    "itemName": "rows",
+    "breadcrumb": {
+      "reports": "Reports",
+      "shiftRevenue": "Shift Revenue Report"
+    },
+    "filter": {
+      "station": "Station",
+      "stationPlaceholder": "Select station",
+      "displayParam": "Display parameter",
+      "displayParamPlaceholder": "Select display parameter",
+      "startDate": "Start date",
+      "startDatePlaceholder": "dd/mm/yyyy",
+      "shift": "Shift",
+      "shiftPlaceholder": "Select shift",
+      "dateRange": "Date Range",
+      "reset": "Reset filters"
+    },
+    "table": {
+      "id": "ID",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "fuelA95": "Gasoline A95-II",
+      "fuelDO": "Diesel DO",
+      "volume": "Liters",
+      "amount": "Amount",
+      "revenue": "Revenue",
+      "debt": "Debt",
+      "total": "Total",
+      "empty": "No shift revenue report data"
+    },
+    "modal": {
+      "staff": "On-duty Staff"
+    },
+    "detailModal": {
+      "title": "Shift Revenue Report Details",
+      "close": "Close"
+    },
+    "toast": {
+      "success": "Success",
+      "error": "Failed",
+      "exportSuccess": "Exported file successfully",
+      "exportFailed": "An error occurred while exporting data"
+    }
+  },
+  "personnelReport": {
+    "title": "Reports",
+    "cardTitle": "Personnel Report",
+    "exportXlsx": "Export xlsx",
+    "exportPdf": "Export pdf",
+    "filterBtn": "Filter",
+    "itemName": "staff members",
+    "breadcrumb": {
+      "reports": "Reports",
+      "personnel": "Personnel"
+    },
+    "filter": {
+      "station": "Station",
+      "stationPlaceholder": "Select station",
+      "displayParam": "Display parameter",
+      "displayParamPlaceholder": "Select display parameter",
+      "role": "Role",
+      "rolePlaceholder": "Select role",
+      "status": "Status",
+      "statusPlaceholder": "Select status",
+      "searchPlaceholder": "Search by name, username, phone...",
+      "reset": "Reset filters"
+    },
+    "table": {
+      "username": "Username",
+      "fullName": "Full Name",
+      "phone": "Phone Number",
+      "role": "Role",
+      "station": "Station",
+      "status": "Status",
+      "empty": "No personnel report data"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "detailModal": {
+      "title": "Personnel Details",
+      "close": "Close"
+    },
+    "toast": {
+      "success": "Success",
+      "error": "Failed",
+      "exportSuccess": "Exported file successfully",
+      "exportFailed": "An error occurred while exporting data"
+    }
   }
 }
+
 

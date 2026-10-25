@@ -1,4 +1,4 @@
-import { useNavigate, NavLink } from 'react-router-dom';
+import { useNavigate, NavLink, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavigationMenu as PRNavigationMenu } from 'primereact/navigationmenu';
 import { Menu as PRMenu } from 'primereact/menu';
@@ -62,6 +62,7 @@ function NavMenuTrigger({ children, className, hasDropdown = true, to }: any) {
 
 export const StaffNavbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
   
@@ -88,7 +89,50 @@ export const StaffNavbar = () => {
             <NavMenuTrigger>{t('staffNavbar.customers')}</NavMenuTrigger>
             <NavMenuTrigger>{t('staffNavbar.allocation')}</NavMenuTrigger>
             <NavMenuTrigger>{t('staffNavbar.tools')}</NavMenuTrigger>
-            <NavMenuTrigger to="/staff/reports">{t('staffNavbar.reports')}</NavMenuTrigger>
+            
+            {/* Reports Dropdown */}
+            <PRMenu.Root>
+              <PRMenu.Trigger className="h-full focus:outline-none cursor-pointer border-none bg-transparent p-0 m-0">
+                <NavMenuTrigger
+                  className={location.pathname.startsWith('/staff/reports') ? '!border-primary !text-primary' : ''}
+                >
+                  {t('staffNavbar.reports')}
+                </NavMenuTrigger>
+              </PRMenu.Trigger>
+              <PRMenu.Portal>
+                <PRMenu.Positioner className="z-50 outline-none">
+                  <PRMenu.Popup className="min-w-[13rem] bg-white rounded-lg shadow-md border border-border p-1 outline-none mt-1">
+                    <PRMenu.List className="m-0 p-0 list-none">
+                      <PRMenu.Item
+                        className="py-2 px-3 text-[13px] font-medium text-content-main hover:bg-surface rounded-md cursor-pointer outline-none transition-colors"
+                        onSelect={() => navigate('/staff/reports/invoices')}
+                      >
+                        Báo cáo hóa đơn
+                      </PRMenu.Item>
+                      <PRMenu.Item
+                        className="py-2 px-3 text-[13px] font-medium text-content-main hover:bg-surface rounded-md cursor-pointer outline-none transition-colors"
+                        onSelect={() => navigate('/staff/reports/shifts')}
+                      >
+                        Doanh thu theo ca
+                      </PRMenu.Item>
+                      <PRMenu.Item
+                        className="py-2 px-3 text-[13px] font-medium text-content-main hover:bg-surface rounded-md cursor-pointer outline-none transition-colors"
+                        onSelect={() => navigate('/staff/reports/personnel')}
+                      >
+                        Nhân sự
+                      </PRMenu.Item>
+                      <PRMenu.Item
+                        className="py-2 px-3 text-[13px] font-medium text-content-main hover:bg-surface rounded-md cursor-pointer outline-none transition-colors"
+                        onSelect={() => navigate('/staff/reports/debt')}
+                      >
+                        Báo cáo công nợ
+                      </PRMenu.Item>
+                    </PRMenu.List>
+                  </PRMenu.Popup>
+                </PRMenu.Positioner>
+              </PRMenu.Portal>
+            </PRMenu.Root>
+
             <div className="ml-4 text-[13px] font-medium text-content-sub hover:text-content-main cursor-pointer">
               {t('staffNavbar.guide')}
             </div>

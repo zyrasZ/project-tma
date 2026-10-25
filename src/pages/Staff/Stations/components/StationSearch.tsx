@@ -13,7 +13,7 @@ export const StationSearch = ({ search, setSearch }: StationSearchProps) => {
   const { t } = useTranslation('common');
   const [localSearch, setLocalSearch] = useState<string>(search);
 
-  const debouncedSearch = useDebounce<string>(localSearch, 500);
+  const debouncedSearch = useDebounce<string>(localSearch, 350);
 
   useEffect(() => {
     setLocalSearch(search);

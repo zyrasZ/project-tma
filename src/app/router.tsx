@@ -13,6 +13,9 @@ import { StationManagementPage } from '../pages/Staff/Stations/StationManagement
 import { FuelParamsPage } from '../pages/Staff/Stations/FuelParamsPage';
 import { InvoiceConfigPage } from '../pages/Staff/InvoiceConfig/InvoiceConfigPage';
 import { InvoiceReportPage } from '../pages/Staff/Reports/InvoiceReport/InvoiceReportPage';
+import { ShiftRevenueReportPage } from '../pages/Staff/Reports/ShiftRevenueReport/ShiftRevenueReportPage';
+import { PersonnelReportPage } from '../pages/Staff/Reports/PersonnelReport/PersonnelReportPage';
+import { DebtReportPage } from '../pages/Staff/Reports/DebtReport/DebtReportPage';
 
 export const AppRouter = () => {
   return (
@@ -58,6 +61,13 @@ export const AppRouter = () => {
             <Route path="reports">
               <Route index element={<InvoiceReportPage />} />
               <Route path="invoices" element={<InvoiceReportPage />} />
+              <Route path="shifts" element={<ShiftRevenueReportPage />} />
+              <Route path="shift-revenue" element={<ShiftRevenueReportPage />} />
+              <Route path="personnel" element={<PersonnelReportPage />} />
+              <Route path="staff" element={<PersonnelReportPage />} />
+              <Route path="debt" element={<DebtReportPage />} />
+              <Route path="debts" element={<DebtReportPage />} />
+              <Route path="cong-no" element={<DebtReportPage />} />
             </Route>
           </Route>
         </Route>

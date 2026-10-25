@@ -13,8 +13,8 @@ export const InvoiceConfigSearch = ({ search, setSearch }: InvoiceConfigSearchPr
   const { t } = useTranslation('common');
   const [localSearch, setLocalSearch] = useState<string>(search);
 
-  // Tái sử dụng hook useDebounce
-  const debouncedSearch = useDebounce<string>(localSearch, 400);
+  // Tái sử dụng hook useDebounce chuẩn UX 350ms cho text search
+  const debouncedSearch = useDebounce<string>(localSearch, 350);
 
   useEffect(() => {
     setLocalSearch(search);

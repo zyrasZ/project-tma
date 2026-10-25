@@ -6,6 +6,43 @@ import type {
   GetInvoiceReportResponse,
 } from '../types/invoiceReport';
 
+const parseDateTime = (str: string, defaultHour = 0, defaultMin = 0): number => {
+  try {
+    const trimmed = str.trim();
+    if (!trimmed) return 0;
+    const [dPart, tPart] = trimmed.split(/\s+/);
+    if (!dPart) return 0;
+
+    let day = 1,
+      month = 1,
+      year = 2024;
+    if (dPart.includes('/')) {
+      const pieces = dPart.split('/').map(Number);
+      day = pieces[0];
+      month = pieces[1];
+      year = pieces[2];
+    } else if (dPart.includes('-')) {
+      const pieces = dPart.split('-').map(Number);
+      year = pieces[0];
+      month = pieces[1];
+      day = pieces[2];
+    }
+
+    let hh = defaultHour;
+    let mm = defaultMin;
+    if (tPart && tPart.includes(':')) {
+      const [h, m] = tPart.split(':').map(Number);
+      hh = isNaN(h) ? defaultHour : h;
+      mm = isNaN(m) ? defaultMin : m;
+    }
+
+    const d = new Date(year, month - 1, day, hh, mm, 0, 0);
+    return isNaN(d.getTime()) ? 0 : d.getTime();
+  } catch {
+    return 0;
+  }
+};
+
 export const invoiceReportApi = {
   getInvoiceReports: async (params?: GetInvoiceReportParams): Promise<GetInvoiceReportResponse> => {
     return new Promise((resolve) => {
@@ -22,12 +59,7 @@ export const invoiceReportApi = {
           filtered = filtered.filter(item => item.fuelType === params.fuelType);
         }
 
-        // 3. Filter by Status
-        if (params?.status && params.status !== 'all' && params.status.trim() !== '') {
-          filtered = filtered.filter(item => item.status === params.status);
-        }
-
-        // 4. Filter by Search Query
+        // 3. Filter by Search Query
         if (params?.search && params.search.trim() !== '') {
           const s = params.search.toLowerCase().trim();
           filtered = filtered.filter(item =>
@@ -41,70 +73,34 @@ export const invoiceReportApi = {
           );
         }
 
-        // 5. Filter by Date Range (if provided)
-        const hasDateRange =
-          params?.dateRange &&
-          (params.dateRange.includes('->') ||
-            params.dateRange.includes('→') ||
-            params.dateRange.includes(' - '));
-
-        if (hasDateRange) {
-          const delimiter = params!.dateRange!.includes('->')
+        // 4. Filter by Date Range (if provided)
+        if (params?.dateRange && params.dateRange.trim() !== '') {
+          const range = params.dateRange.trim();
+          const delimiter = range.includes('->')
             ? '->'
-            : params!.dateRange!.includes('→')
+            : range.includes('→')
             ? '→'
             : ' - ';
-          const parts = params!.dateRange!.split(delimiter).map(s => s.trim());
-          const parseDateTime = (str: string) => {
-            try {
-              const [dPart, tPart] = str.split(' ');
-              if (!dPart) return 0;
-              let day = 1, month = 1, year = 2024;
-              if (dPart.includes('/')) {
-                const pieces = dPart.split('/').map(Number);
-                day = pieces[0];
-                month = pieces[1];
-                year = pieces[2];
-              } else if (dPart.includes('-')) {
-                const pieces = dPart.split('-').map(Number);
-                year = pieces[0];
-                month = pieces[1];
-                day = pieces[2];
-              }
-              const [hh, mm] = (tPart || '00:00').split(':').map(Number);
-              return new Date(year, month - 1, day, hh || 0, mm || 0).getTime();
-            } catch {
-              return 0;
-            }
-          };
-
-          const startTime = parseDateTime(parts[0]);
-          const endTime = parseDateTime(parts[1]) + 59999;
+          const parts = range.split(delimiter).map(s => s.trim());
+          const startTime = parseDateTime(parts[0], 0, 0);
+          const endTime = parts[1]
+            ? parseDateTime(parts[1], 23, 59) + 59999
+            : startTime + 86399999;
 
           if (startTime && endTime) {
-            const isDefaultSampleRange = Boolean(
-              params?.dateRange?.includes('01/01/2024') && params?.dateRange?.includes('31/01/2024')
-            );
-
-            if (!isDefaultSampleRange) {
-              const sDate = parts[0].split(' ')[0] || '';
-
-              // Filter or adapt records to the chosen date range
-              filtered = filtered.map((item, idx) => {
-                const formattedPumpDate = `${sDate} 16:${(20 + idx * 3).toString().padStart(2, '0')}`;
-                return {
-                  ...item,
-                  pumpDate: formattedPumpDate,
-                  createdDate: formattedPumpDate,
-                  createdAt: formattedPumpDate,
-                };
-              });
-            }
+            filtered = filtered.filter(item => {
+              const itemDateStr = item.pumpDate || item.createdDate || item.createdAt || '';
+              const itemTime = parseDateTime(itemDateStr, 0, 0);
+              return itemTime >= startTime && itemTime <= endTime;
+            });
           }
         } else if (params?.fromDate && params?.toDate) {
+          const startTime = parseDateTime(params.fromDate, 0, 0);
+          const endTime = parseDateTime(params.toDate, 23, 59) + 59999;
           filtered = filtered.filter(item => {
-            if (!item.createdAt) return true;
-            return item.createdAt >= params.fromDate! && item.createdAt <= params.toDate!;
+            const itemDateStr = item.pumpDate || item.createdDate || item.createdAt || '';
+            const itemTime = parseDateTime(itemDateStr, 0, 0);
+            return itemTime >= startTime && itemTime <= endTime;
           });
         }
 
@@ -114,7 +110,7 @@ export const invoiceReportApi = {
         const scopedError = filtered.filter(item => item.status === 'error').length;
         const scopedFlagged = filtered.filter(item => item.status === 'flagged').length;
 
-        // 6. Filter by Status (if specified)
+        // 5. Filter by Status (if specified)
         const filterStatus = params?.status?.trim();
         const isStatusFiltered = Boolean(filterStatus && filterStatus !== 'all');
         if (isStatusFiltered && filterStatus) {
@@ -143,8 +139,8 @@ export const invoiceReportApi = {
           paymentMethod: 'TM/CK',
           formNumber: '1',
           symbol: 'K24TYY',
-          pumpDate: item.createdAt || '06/11/2023 16:48',
-          createdDate: item.createdAt || '06/11/2023 16:48',
+          pumpDate: '06/11/2023 16:48',
+          createdDate: '06/11/2023 16:48',
           ...item,
         }));
 

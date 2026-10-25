@@ -15,8 +15,8 @@ export const CompanySearch = ({ search, setSearch }: CompanySearchProps) => {
   // State cục bộ để hiển thị ngay lập tức khi user gõ
   const [localSearch, setLocalSearch] = useState<string>(search);
 
-  // Tái sử dụng hook useDebounce
-  const debouncedSearch = useDebounce<string>(localSearch, 500);
+  // Tái sử dụng hook useDebounce chuẩn UX 350ms cho text search
+  const debouncedSearch = useDebounce<string>(localSearch, 350);
 
   // Cập nhật lại localSearch nếu props 'search' bị thay đổi từ bên ngoài (ví dụ: bấm nút Reset)
   useEffect(() => {
