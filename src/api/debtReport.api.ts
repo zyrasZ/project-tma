@@ -1,4 +1,4 @@
-import { debtReportsMock, debtSummaryMock } from '../mocks/debtReports.mock';
+import { debtReportsMock } from '../mocks/debtReports.mock';
 import type {
   GetDebtReportParams,
   GetDebtReportResponse,
@@ -91,8 +91,9 @@ export const debtReportApi = {
         }
 
         // Calculate dynamic summary based on filtered items
-        const parseAmount = (amtStr?: string) => {
-          if (!amtStr) return 0;
+        const parseAmount = (amtStr?: string | number) => {
+          if (amtStr === undefined || amtStr === null || amtStr === '') return 0;
+          if (typeof amtStr === 'number') return amtStr;
           const clean = amtStr.replace(/\./g, '').replace(/,/g, '');
           return parseInt(clean, 10) || 0;
         };
