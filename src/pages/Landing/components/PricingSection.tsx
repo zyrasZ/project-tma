@@ -31,7 +31,7 @@ export const PricingSection = () => {
   ];
 
   return (
-    <section id="pricing" className="py-24 px-4 md:px-10 bg-white">
+    <section id="pricing" className="py-24 px-4 md:px-10 bg-white scroll-mt-20">
       <div className="w-full max-w-[1424px] mx-auto">
         <h2 className="text-3xl md:text-5xl font-bold text-center text-content-main mb-16">
           {t('landing.pricing.title')}

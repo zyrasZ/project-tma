@@ -31,7 +31,7 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 px-4 md:px-10 bg-[#F4F7F7]">
+    <section id="contact" className="py-24 px-4 md:px-10 bg-[#F4F7F7] scroll-mt-20">
       <div className="max-w-[784px] mx-auto flex flex-col items-center">
         <h2 className="text-3xl md:text-[40px] font-bold text-content-main mb-12 text-center">
           {t('landing.contact.title')}

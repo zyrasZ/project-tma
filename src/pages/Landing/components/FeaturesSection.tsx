@@ -38,7 +38,7 @@ export const FeaturesSection = () => {
   ];
 
   return (
-    <section id="features" className="py-24 px-4 md:px-10 bg-[#fafafa]">
+    <section id="features" className="py-24 px-4 md:px-10 bg-[#fafafa] scroll-mt-20">
       <div className="max-w-[1200px] mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-content-main mb-20">
           {t('landing.features.title')}

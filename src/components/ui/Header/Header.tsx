@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '../../../lib/utils';
 import { Button } from '../Button';
@@ -16,7 +16,15 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
   ({ logo, navLinks = [], rightElement, className, containerClassName, ...props }, ref) => {
     const navigate = useNavigate();
     const { t } = useTranslation('common');
-    
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+      const handleScroll = () => setIsScrolled(window.scrollY > 20);
+      handleScroll();
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     const startContent = (
       <React.Fragment>
         {logo || <img src="/logo.png" alt="TMA Logo" className="h-8" />}
@@ -55,7 +63,10 @@ export const Header = React.forwardRef<HTMLElement, HeaderProps>(
       <header
         ref={ref}
         className={cn(
-          'fixed top-0 z-50 w-full bg-transparent transition-all duration-300',
+          'fixed top-0 z-50 w-full border-b transition-all duration-300',
+          isScrolled
+            ? 'bg-white/95 backdrop-blur-md shadow-sm border-divide/60'
+            : 'bg-transparent border-transparent',
           className
         )}
         {...props}
